@@ -1,0 +1,15 @@
+node_modules/
+.env
+uploads/
+cookies.txt
+*.log
+
+
+nmskwtio_19aug19.sql
+db-test.js
+index.js
+server-backup.js
+server.before-auth.js
+index-backup.html
+
+*.backup
