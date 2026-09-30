@@ -13,3 +13,4 @@ server.before-auth.js
 index-backup.html
 
 *.backup
+index.html
