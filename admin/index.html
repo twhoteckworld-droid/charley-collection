@@ -4,94 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Hariom Photography — Admin</title>
+  <title>Charley Collection — Admin</title>
 
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      background: #0b0b0b;
-      color: #fff;
       font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #171717;
     }
 
     button,
-    input {
+    input,
+    textarea,
+    select {
       font: inherit;
     }
 
-    .hidden {
-      display: none !important;
+    .login,
+    .app {
+      min-height: 100vh;
     }
 
-    /* LOGIN */
-
-    #loginScreen {
-      min-height: 100vh;
+    .login {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
 
-    .login-box {
+    .card {
       width: 100%;
-      max-width: 400px;
-      background: #171717;
-      border: 1px solid #292929;
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.4);
+      max-width: 430px;
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.08);
     }
 
-    .brand {
-      text-align: center;
-      margin-bottom: 28px;
+    h1 {
+      margin-bottom: 7px;
     }
 
-    .brand h1 {
-      margin: 0 0 8px;
-      font-size: 28px;
-    }
-
-    .brand p {
-      margin: 0;
-      color: #999;
+    .muted {
+      color: #777;
+      margin-bottom: 20px;
     }
 
     label {
       display: block;
+      font-weight: 600;
       margin: 14px 0 7px;
-      color: #bbb;
-      font-size: 14px;
     }
 
-    input {
+    input,
+    textarea,
+    select {
       width: 100%;
-      padding: 14px;
-      border-radius: 10px;
-      border: 1px solid #333;
-      background: #0f0f0f;
-      color: white;
+      border: 1px solid #ddd;
+      border-radius: 11px;
+      padding: 12px;
       outline: none;
+      background: white;
     }
 
-    input:focus {
-      border-color: #777;
+    textarea {
+      min-height: 90px;
+      resize: vertical;
     }
 
     button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 14px;
       border: 0;
-      border-radius: 10px;
-      background: white;
-      color: #111;
-      font-weight: bold;
       cursor: pointer;
     }
 
@@ -100,193 +88,210 @@
       cursor: not-allowed;
     }
 
-    .error {
-      color: #ff7777;
-      margin-top: 12px;
-      text-align: center;
+    .primary {
+      width: 100%;
+      background: #111;
+      color: white;
+      padding: 13px;
+      border-radius: 11px;
+      font-weight: 700;
+      margin-top: 18px;
     }
 
-    /* DASHBOARD */
+    .error {
+      color: #c00;
+      margin-top: 12px;
+    }
 
-    #dashboard {
-      min-height: 100vh;
+    .app {
+      display: none;
     }
 
     header {
-      border-bottom: 1px solid #242424;
-      padding: 18px;
-      position: sticky;
-      top: 0;
-      background: rgba(11,11,11,.95);
-      backdrop-filter: blur(10px);
-      z-index: 10;
+      background: #111;
+      color: white;
+      padding: 16px;
     }
 
     .header-inner {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: auto;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 15px;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    header p {
-      margin: 4px 0 0;
-      color: #888;
-      font-size: 13px;
-    }
-
     .logout {
-      width: auto;
-      margin: 0;
-      padding: 10px 16px;
-      background: #222;
+      background: #333;
       color: white;
-      border: 1px solid #333;
+      padding: 9px 13px;
+      border-radius: 9px;
     }
 
-    .container {
-      max-width: 1100px;
+    main {
+      max-width: 1200px;
       margin: auto;
-      padding: 22px 16px 50px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .stat {
-      background: #171717;
-      border: 1px solid #292929;
-      border-radius: 14px;
-      padding: 18px;
-    }
-
-    .stat span {
-      display: block;
-      color: #888;
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
-
-    .stat strong {
-      font-size: 28px;
-    }
-
-    .panel {
-      background: #171717;
-      border: 1px solid #292929;
-      border-radius: 16px;
       padding: 20px;
-      margin-bottom: 22px;
     }
 
-    .panel h2 {
-      margin-top: 0;
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
     }
 
-    #preview {
-      width: 100%;
-      max-height: 300px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-top: 12px;
-    }
-
-    .message {
-      text-align: center;
-      margin-top: 12px;
-      min-height: 20px;
-    }
-
-    .success {
-      color: #7ee787;
-    }
-
-    .danger {
-      color: #ff7777;
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .photo-card {
-      overflow: hidden;
+    .add {
       background: #111;
-      border: 1px solid #292929;
-      border-radius: 14px;
+      color: white;
+      padding: 11px 15px;
+      border-radius: 10px;
     }
 
-    .photo-card img {
-      width: 100%;
+    .form-card {
+      background: white;
+      padding: 20px;
+      border-radius: 18px;
+      margin-bottom: 25px;
+      display: none;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #eee;
+    }
+
+    .image {
       height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .photo-info {
-      padding: 13px;
-    }
-
-    .photo-title {
-      font-weight: bold;
-      margin-bottom: 6px;
-      word-break: break-word;
-    }
-
-    .photo-date {
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: #777;
-      font-size: 12px;
+    }
+
+    .image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info {
+      padding: 15px;
+    }
+
+    .name {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .price {
+      font-weight: 700;
+      margin: 8px 0;
+    }
+
+    .description {
+      color: #777;
+      font-size: 14px;
       margin-bottom: 12px;
     }
 
-    .delete-btn {
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .actions button {
+      flex: 1;
+      padding: 10px;
+      border-radius: 9px;
+    }
+
+    .edit {
+      background: #eee;
+    }
+
+    .delete {
+      background: #fee;
+      color: #b00020;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #eee;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .active {
+      background: #e7f8ed;
+      color: #18743b;
+    }
+
+    .size-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 16px;
+    }
+
+    .size-options label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 13px;
+      border: 1px solid #ddd;
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
       margin: 0;
-      background: #261414;
-      color: #ff8c8c;
-      border: 1px solid #4a2525;
+      font-weight: 600;
     }
 
-    .loading,
-    .empty {
-      color: #888;
-      text-align: center;
-      padding: 30px 10px;
+    .size-options input {
+      width: auto;
+      margin: 0;
+      padding: 0;
     }
 
-    @media (max-width: 800px) {
-      .photo-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    .sizes-display {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 8px 0 12px;
     }
 
-    @media (max-width: 520px) {
-      .header-inner {
-        align-items: flex-start;
-      }
+    .size-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #f1f1f1;
+      font-size: 12px;
+      font-weight: 600;
+    }
 
-      .photo-grid {
-        grid-template-columns: 1fr;
-      }
+    .form-message {
+      margin-top: 12px;
+      color: #18743b;
+      font-size: 14px;
+    }
 
-      .photo-card img {
-        height: 250px;
-      }
-
-      .login-box {
-        padding: 22px;
+    @media (min-width: 700px) {
+      .products {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   </style>
@@ -294,659 +299,1336 @@
 
 <body>
 
-  <!-- LOGIN -->
+<!-- LOGIN -->
 
-  <section id="loginScreen">
-    <div class="login-box">
+<section id="loginScreen" class="login">
 
-      <div class="brand">
-        <h1>Hariom Photography</h1>
-        <p>Admin Login</p>
+  <div class="card">
+
+    <h1>Charley Collection</h1>
+
+    <p class="muted">
+      Store Admin
+    </p>
+
+    <form id="loginForm">
+
+      <label>Username</label>
+
+      <input
+        id="username"
+        autocomplete="username"
+        required
+      >
+
+      <label>Password</label>
+
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button type="submit" class="primary">
+        Login
+      </button>
+
+      <p id="loginError" class="error"></p>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- ADMIN APP -->
+
+<section id="app" class="app">
+
+  <header>
+
+    <div class="header-inner">
+
+      <strong>CHARLEY COLLECTION</strong>
+
+      <button class="logout" onclick="logout()">
+        Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <div class="top">
+
+      <div>
+        <h2>Products</h2>
+
+        <p class="muted">
+          Manage your store catalogue
+        </p>
       </div>
 
-      <form id="loginForm">
+      <button class="add" onclick="openForm()">
+        + Add Product
+      </button>
 
-        <label for="username">Username</label>
+    </div>
+
+
+    <!-- PRODUCT FORM -->
+
+    <div id="formCard" class="form-card">
+
+      <h2 id="formTitle">
+        Add Product
+      </h2>
+
+      <form id="productForm">
+
         <input
-          id="username"
-          type="text"
-          autocomplete="username"
+          type="hidden"
+          id="productId"
+        >
+
+
+        <label>Product Name *</label>
+
+        <input
+          id="productName"
+          placeholder="Example: Cotton Shirt"
           required
         >
 
-        <label for="password">Password</label>
+
+        <label>Category</label>
+
+        <select id="category">
+
+          <option value="Men">Men</option>
+          <option value="Women">Women</option>
+          <option value="Kids">Kids</option>
+          <option value="Accessories">Accessories</option>
+
+        </select>
+
+
+        <label>Price</label>
+
         <input
-          id="password"
-          type="password"
-          autocomplete="current-password"
-          required
+          id="price"
+          type="number"
+          min="0"
+          placeholder="Leave empty for Ask for Price"
         >
 
-        <button id="loginButton" type="submit">
-          Login
+
+        <label>Product Image</label>
+
+        <input
+          id="imageFile"
+          type="file"
+          accept="image/*"
+        >
+
+        <input
+          id="image"
+          type="hidden"
+        >
+
+
+        <div
+          id="imagePreview"
+          style="margin-top:10px;display:none"
+        >
+
+          <img
+            id="previewImg"
+            style="
+              width:120px;
+              height:120px;
+              object-fit:cover;
+              border-radius:12px;
+            "
+          >
+
+        </div>
+
+
+        <p
+          id="uploadMessage"
+          style="margin-top:8px;color:#777"
+        ></p>
+
+
+        <!-- SIZES -->
+
+        <label>
+          Available Sizes
+        </label>
+
+        <div class="size-options">
+
+          <label>
+            <input
+              type="checkbox"
+              name="size"
+              value="S"
+            >
+            S
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="size"
+              value="M"
+            >
+            M
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="size"
+              value="L"
+            >
+            L
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="size"
+              value="XL"
+            >
+            XL
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              name="size"
+              value="XXL"
+            >
+            XXL
+          </label>
+
+        </div>
+
+
+        <label>Description</label>
+
+        <textarea
+          id="description"
+          placeholder="Product description"
+        ></textarea>
+
+
+        <label>
+
+          <input
+            id="active"
+            type="checkbox"
+            checked
+            style="width:auto"
+          >
+
+          Show product on website
+
+        </label>
+
+
+        <button
+          id="saveButton"
+          type="submit"
+          class="primary"
+        >
+          Save Product
         </button>
 
-        <div id="loginMessage" class="error"></div>
+
+        <button
+          type="button"
+          class="primary"
+          style="background:#eee;color:#111"
+          onclick="closeForm()"
+        >
+          Cancel
+        </button>
+
+
+        <p
+          id="formMessage"
+          class="form-message"
+        ></p>
 
       </form>
 
     </div>
-  </section>
 
 
-  <!-- DASHBOARD -->
+    <div
+      id="products"
+      class="products"
+    ></div>
 
-  <section id="dashboard" class="hidden">
+  </main>
 
-    <header>
-      <div class="header-inner">
-
-        <div>
-          <h1>Hariom Photography</h1>
-          <p>Admin Dashboard</p>
-        </div>
-
-        <button
-          class="logout"
-          onclick="logout()">
-          Logout
-        </button>
-
-      </div>
-    </header>
-
-    <main class="container">
-
-      <div class="stats">
-
-        <div class="stat">
-          <span>Total Photos</span>
-          <strong id="photoCount">0</strong>
-        </div>
-
-        <div class="stat">
-          <span>Status</span>
-          <strong>Online</strong>
-        </div>
-
-      </div>
+</section>
 
 
-      <!-- UPLOAD -->
+<script>
 
-      <div class="panel">
-
-        <h2>Upload New Photo</h2>
-
-        <form id="uploadForm">
-
-          <label for="photo">Photo</label>
-
-          <input
-            id="photo"
-            type="file"
-            accept="image/*"
-            required
-          >
-
-          <img
-            id="preview"
-            class="hidden"
-            alt="Preview"
-          >
-
-          <label for="title">Photo Title</label>
-
-          <input
-            id="title"
-            type="text"
-            maxlength="200"
-            placeholder="Enter photo title"
-          >
-
-          <button id="uploadButton" type="submit">
-            Upload Photo
-          </button>
-
-          <div id="uploadMessage" class="message"></div>
-
-        </form>
-
-      </div>
+let products = [];
 
 
-      <!-- PHOTOS -->
+/* API */
 
-      <div class="panel">
+async function api(url, options = {}) {
 
-        <h2>Photo Library</h2>
+  const response = await fetch(url, {
 
-        <div
-          id="gallery"
-          class="photo-grid">
-          <div class="loading">
-            Loading photos...
-          </div>
-        </div>
+    credentials: "same-origin",
 
-      </div>
+    ...options,
 
-    </main>
+    headers: {
+      "Content-Type": "application/json",
+      ...(options.headers || {})
+    }
 
-  </section>
+  });
 
+  const data =
+    await response.json().catch(() => ({}));
 
-  <script>
+  if (!response.ok) {
 
-    const loginScreen = document.getElementById('loginScreen');
-    const dashboard = document.getElementById('dashboard');
+    throw new Error(
+      data.error || "Request failed"
+    );
 
-    const loginForm = document.getElementById('loginForm');
-    const loginButton = document.getElementById('loginButton');
-    const loginMessage = document.getElementById('loginMessage');
+  }
 
-    const uploadForm = document.getElementById('uploadForm');
-    const uploadButton = document.getElementById('uploadButton');
-    const uploadMessage = document.getElementById('uploadMessage');
+  return data;
 
-    const photoInput = document.getElementById('photo');
-    const titleInput = document.getElementById('title');
-    const preview = document.getElementById('preview');
-
-    const gallery = document.getElementById('gallery');
-    const photoCount = document.getElementById('photoCount');
+}
 
 
-    /* =========================
-       LOGIN
-    ========================= */
+/* LOGIN */
 
-    loginForm.addEventListener('submit', async (event) => {
+document
+  .getElementById("loginForm")
+  .addEventListener(
+    "submit",
+    async event => {
 
       event.preventDefault();
 
-      loginMessage.textContent = '';
-      loginButton.disabled = true;
-      loginButton.textContent = 'Logging in...';
+      const error =
+        document.getElementById("loginError");
 
-      const username =
-        document.getElementById('username').value;
+      const button =
+        event.currentTarget.querySelector("button");
 
-      const password =
-        document.getElementById('password').value;
+      error.textContent = "";
+
+      button.disabled = true;
+
+      button.textContent =
+        "Logging in...";
+
 
       try {
 
-        const response = await fetch(
-          '/api/admin/login',
+        await api(
+          "/api/admin/login",
           {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
+            method: "POST",
+
             body: JSON.stringify({
-              username,
-              password
+
+              username:
+                document
+                  .getElementById("username")
+                  .value
+                  .trim(),
+
+              password:
+                document
+                  .getElementById("password")
+                  .value
+
             })
+
           }
         );
 
-        const data = await response.json();
 
-        if (!response.ok) {
-          throw new Error(
-            data.error || 'Login failed'
-          );
-        }
+        showApp();
 
-        showDashboard();
 
-      } catch (error) {
+      } catch (err) {
 
-        loginMessage.textContent =
-          error.message;
+        error.textContent =
+          err.message || "Login failed";
 
-      } finally {
+        button.disabled = false;
 
-        loginButton.disabled = false;
-        loginButton.textContent = 'Login';
+        button.textContent =
+          "Login";
 
       }
+
+    }
+  );
+
+
+async function checkLogin() {
+
+  try {
+
+    await api(
+      "/api/admin/me"
+    );
+
+    showApp();
+
+  } catch {
+
+    document
+      .getElementById("loginScreen")
+      .style.display = "flex";
+
+    document
+      .getElementById("app")
+      .style.display = "none";
+
+  }
+
+}
+
+
+function showApp() {
+
+  document
+    .getElementById("loginScreen")
+    .style.display = "none";
+
+  document
+    .getElementById("app")
+    .style.display = "block";
+
+  loadProducts();
+
+}
+
+
+async function logout() {
+
+  try {
+
+    await api(
+      "/api/admin/logout",
+      {
+        method: "POST"
+      }
+    );
+
+  } finally {
+
+    location.reload();
+
+  }
+
+}
+
+
+/* PRODUCTS */
+
+async function loadProducts() {
+
+  try {
+
+    products =
+      await api(
+        "/api/admin/products"
+      );
+
+    renderProducts();
+
+  } catch (err) {
+
+    document
+      .getElementById("products")
+      .innerHTML = `
+
+        <div class="card">
+
+          ${escapeHtml(err.message)}
+
+        </div>
+
+      `;
+
+  }
+
+}
+
+
+/* RENDER PRODUCTS */
+
+function renderProducts() {
+
+  const container =
+    document.getElementById("products");
+
+
+  if (!products.length) {
+
+    container.innerHTML = `
+
+      <div class="card">
+
+        <h3>No products yet</h3>
+
+        <p class="muted">
+
+          Click "+ Add Product"
+          to add your first product.
+
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    products.map(product => {
+
+      const sizes =
+        Array.isArray(product.sizes)
+          ? product.sizes
+          : [];
+
+
+      return `
+
+        <article class="product">
+
+          <div class="image">
+
+            ${
+              product.image
+
+                ? `
+
+                  <img
+                    src="${escapeHtml(product.image)}"
+                    alt="${escapeHtml(product.name)}"
+                  >
+
+                `
+
+                : "Image coming soon"
+            }
+
+          </div>
+
+
+          <div class="info">
+
+
+            <span
+              class="status ${
+                product.active
+                  ? "active"
+                  : ""
+              }"
+            >
+
+              ${
+                product.active
+                  ? "Visible"
+                  : "Hidden"
+              }
+
+            </span>
+
+
+            <div class="name">
+
+              ${escapeHtml(product.name)}
+
+            </div>
+
+
+            <div>
+
+              ${escapeHtml(
+                product.category || "Other"
+              )}
+
+            </div>
+
+
+            <div class="price">
+
+              ${
+                product.price
+
+                  ? "₹" +
+                    Number(
+                      product.price
+                    ).toLocaleString(
+                      "en-IN"
+                    )
+
+                  : "Ask for Price"
+              }
+
+            </div>
+
+
+            ${
+              sizes.length
+
+                ? `
+
+                  <div class="sizes-display">
+
+                    ${sizes.map(size => `
+
+                      <span class="size-badge">
+                        ${escapeHtml(size)}
+                      </span>
+
+                    `).join("")}
+
+                  </div>
+
+                `
+
+                : ""
+            }
+
+
+            <div class="description">
+
+              ${escapeHtml(
+                product.description ||
+                "No description"
+              )}
+
+            </div>
+
+
+            <div class="actions">
+
+              <button
+                class="edit"
+                onclick="editProduct('${escapeJs(product.id)}')"
+              >
+                Edit
+              </button>
+
+
+              <button
+                class="delete"
+                onclick="deleteProduct('${escapeJs(product.id)}')"
+              >
+                Delete
+              </button>
+
+            </div>
+
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* OPEN / EDIT FORM */
+
+function openForm(product = null) {
+
+  const form =
+    document.getElementById("productForm");
+
+
+  form.reset();
+
+
+  document
+    .getElementById("formCard")
+    .style.display = "block";
+
+
+  document
+    .getElementById("formTitle")
+    .textContent =
+      product
+        ? "Edit Product"
+        : "Add Product";
+
+
+  document
+    .getElementById("productId")
+    .value =
+      product
+        ? product.id
+        : "";
+
+
+  document
+    .getElementById("productName")
+    .value =
+      product
+        ? product.name || ""
+        : "";
+
+
+  document
+    .getElementById("category")
+    .value =
+      product
+        ? product.category || "Men"
+        : "Men";
+
+
+  document
+    .getElementById("price")
+    .value =
+      product &&
+      product.price != null
+        ? product.price
+        : "";
+
+
+  document
+    .getElementById("image")
+    .value =
+      product
+        ? product.image || ""
+        : "";
+
+
+  document
+    .getElementById("description")
+    .value =
+      product
+        ? product.description || ""
+        : "";
+
+
+  document
+    .getElementById("active")
+    .checked =
+      product
+        ? product.active !== false
+        : true;
+
+
+  /* LOAD SIZES */
+
+  const productSizes =
+    product &&
+    Array.isArray(product.sizes)
+      ? product.sizes
+      : [];
+
+
+  document
+    .querySelectorAll(
+      'input[name="size"]'
+    )
+    .forEach(input => {
+
+      input.checked =
+        productSizes.includes(
+          input.value
+        );
 
     });
 
 
-    /* =========================
-       SESSION CHECK
-    ========================= */
+  /* IMAGE PREVIEW */
 
-    async function checkSession() {
+  const preview =
+    document.getElementById(
+      "imagePreview"
+    );
 
-      try {
-
-        const response = await fetch(
-          '/api/admin/me'
-        );
-
-        if (response.ok) {
-          showDashboard();
-        } else {
-          showLogin();
-        }
-
-      } catch (error) {
-
-        showLogin();
-
-      }
-
-    }
-
-
-    /* =========================
-       SHOW LOGIN
-    ========================= */
-
-    function showLogin() {
-
-      loginScreen.classList.remove('hidden');
-      dashboard.classList.add('hidden');
-
-    }
-
-
-    /* =========================
-       SHOW DASHBOARD
-    ========================= */
-
-    function showDashboard() {
-
-      loginScreen.classList.add('hidden');
-      dashboard.classList.remove('hidden');
-
-      loadPhotos();
-
-    }
-
-
-    /* =========================
-       UPLOAD PREVIEW
-    ========================= */
-
-    photoInput.addEventListener(
-      'change',
-      () => {
-
-        const file = photoInput.files[0];
-
-        if (!file) {
-
-          preview.classList.add('hidden');
-          preview.removeAttribute('src');
-
-          return;
-        }
-
-        preview.src =
-          URL.createObjectURL(file);
-
-        preview.classList.remove('hidden');
-
-      }
+  const previewImg =
+    document.getElementById(
+      "previewImg"
     );
 
 
-    /* =========================
-       UPLOAD
-    ========================= */
+  if (
+    product &&
+    product.image
+  ) {
 
-    uploadForm.addEventListener(
-      'submit',
-      async (event) => {
+    previewImg.src =
+      product.image;
 
-        event.preventDefault();
+    preview.style.display =
+      "block";
 
-        const file =
-          photoInput.files[0];
+  } else {
 
-        if (!file) {
+    preview.style.display =
+      "none";
 
-          uploadMessage.textContent =
-            'Please select a photo';
+    previewImg.removeAttribute(
+      "src"
+    );
 
-          uploadMessage.className =
-            'message danger';
-
-          return;
-        }
-
-        const form =
-          new FormData();
-
-        form.append(
-          'photo',
-          file
-        );
-
-        form.append(
-          'title',
-          titleInput.value
-        );
-
-        uploadButton.disabled = true;
-        uploadButton.textContent =
-          'Uploading...';
-
-        uploadMessage.textContent =
-          'Uploading photo...';
-
-        uploadMessage.className =
-          'message';
+  }
 
 
-        try {
+  document
+    .getElementById(
+      "uploadMessage"
+    )
+    .textContent = "";
 
-          const response = await fetch(
-            '/api/admin/upload',
-            {
-              method: 'POST',
-              body: form
-            }
+
+  document
+    .getElementById(
+      "formMessage"
+    )
+    .textContent = "";
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* CLOSE FORM */
+
+function closeForm() {
+
+  document
+    .getElementById("formCard")
+    .style.display = "none";
+
+
+  document
+    .getElementById("productForm")
+    .reset();
+
+
+  document
+    .getElementById("productId")
+    .value = "";
+
+
+  document
+    .querySelectorAll(
+      'input[name="size"]'
+    )
+    .forEach(input => {
+
+      input.checked = false;
+
+    });
+
+
+  document
+    .getElementById(
+      "imagePreview"
+    )
+    .style.display = "none";
+
+
+  document
+    .getElementById(
+      "previewImg"
+    )
+    .removeAttribute("src");
+
+
+  document
+    .getElementById(
+      "uploadMessage"
+    )
+    .textContent = "";
+
+
+  document
+    .getElementById(
+      "formMessage"
+    )
+    .textContent = "";
+
+}
+
+
+/* SAVE PRODUCT */
+
+document
+  .getElementById("productForm")
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const id =
+        document
+          .getElementById("productId")
+          .value;
+
+
+      let imageUrl =
+        document
+          .getElementById("image")
+          .value;
+
+
+      const file =
+        document
+          .getElementById("imageFile")
+          .files[0];
+
+
+      const saveButton =
+        document
+          .getElementById("saveButton");
+
+
+      const message =
+        document
+          .getElementById("formMessage");
+
+
+      try {
+
+        saveButton.disabled = true;
+
+        saveButton.textContent =
+          "Saving...";
+
+        message.textContent = "";
+
+
+        /* IMAGE UPLOAD */
+
+        if (file) {
+
+          const formData =
+            new FormData();
+
+
+          formData.append(
+            "image",
+            file
           );
 
-          const data =
+
+          document
+            .getElementById(
+              "uploadMessage"
+            )
+            .textContent =
+              "Uploading image...";
+
+
+          const response =
+            await fetch(
+              "/api/admin/products/upload-image",
+              {
+                method: "POST",
+
+                credentials:
+                  "same-origin",
+
+                body: formData
+              }
+            );
+
+
+          const result =
             await response.json();
+
 
           if (!response.ok) {
 
-            if (response.status === 401) {
-              showLogin();
-              throw new Error(
-                'Session expired. Please login again.'
-              );
-            }
-
             throw new Error(
-              data.error || 'Upload failed'
+              result.error ||
+              "Image upload failed"
             );
 
           }
 
-          uploadMessage.textContent =
-            'Photo uploaded successfully';
 
-          uploadMessage.className =
-            'message success';
+          imageUrl =
+            result.url;
 
-          uploadForm.reset();
 
-          preview.classList.add('hidden');
-          preview.removeAttribute('src');
+          document
+            .getElementById("image")
+            .value =
+              imageUrl;
 
-          await loadPhotos();
 
-        } catch (error) {
-
-          uploadMessage.textContent =
-            error.message;
-
-          uploadMessage.className =
-            'message danger';
-
-        } finally {
-
-          uploadButton.disabled = false;
-          uploadButton.textContent =
-            'Upload Photo';
+          document
+            .getElementById(
+              "uploadMessage"
+            )
+            .textContent =
+              "Image uploaded successfully.";
 
         }
 
+
+        /* GET SELECTED SIZES */
+
+        const sizes =
+          Array.from(
+            document.querySelectorAll(
+              'input[name="size"]:checked'
+            )
+          ).map(
+            input => input.value
+          );
+
+
+        /* PRODUCT DATA */
+
+        const data = {
+
+          name:
+            document
+              .getElementById(
+                "productName"
+              )
+              .value
+              .trim(),
+
+          category:
+            document
+              .getElementById(
+                "category"
+              )
+              .value,
+
+          price:
+            document
+              .getElementById(
+                "price"
+              )
+              .value,
+
+          image:
+            imageUrl,
+
+          description:
+            document
+              .getElementById(
+                "description"
+              )
+              .value
+              .trim(),
+
+          sizes:
+            sizes,
+
+          active:
+            document
+              .getElementById(
+                "active"
+              )
+              .checked
+
+        };
+
+
+        /* UPDATE */
+
+        if (id) {
+
+          await api(
+            "/api/admin/products/" +
+            encodeURIComponent(id),
+
+            {
+              method: "PUT",
+
+              body:
+                JSON.stringify(data)
+
+            }
+          );
+
+
+          message.textContent =
+            "Product updated successfully.";
+
+        }
+
+
+        /* CREATE */
+
+        else {
+
+          await api(
+            "/api/admin/products",
+
+            {
+              method: "POST",
+
+              body:
+                JSON.stringify(data)
+
+            }
+          );
+
+
+          message.textContent =
+            "Product added successfully.";
+
+        }
+
+
+        await loadProducts();
+
+
+        setTimeout(
+          () => {
+            closeForm();
+          },
+          500
+        );
+
+
+      } catch (err) {
+
+        console.error(
+          "PRODUCT SAVE ERROR:",
+          err
+        );
+
+
+        message.style.color =
+          "#b00020";
+
+
+        message.textContent =
+          err.message ||
+          "Something went wrong.";
+
+
+      } finally {
+
+        saveButton.disabled =
+          false;
+
+        saveButton.textContent =
+          "Save Product";
+
+      }
+
+    }
+  );
+
+
+/* EDIT */
+
+function editProduct(id) {
+
+  const product =
+    products.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if (product) {
+
+    openForm(product);
+
+  }
+
+}
+
+
+/* DELETE */
+
+async function deleteProduct(id) {
+
+  const product =
+    products.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if (!product) return;
+
+
+  if (
+    !confirm(
+      `Delete "${product.name}"?`
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  try {
+
+    await api(
+      "/api/admin/products/" +
+      encodeURIComponent(id),
+
+      {
+        method: "DELETE"
       }
     );
 
 
-    /* =========================
-       LOAD PHOTOS
-    ========================= */
-
-    async function loadPhotos() {
-
-      gallery.innerHTML =
-        '<div class="loading">Loading photos...</div>';
-
-      try {
-
-        const response = await fetch(
-          '/api/admin/photos'
-        );
-
-        if (response.status === 401) {
-
-          showLogin();
-
-          return;
-        }
-
-        const photos =
-          await response.json();
-
-        if (!response.ok) {
-
-          throw new Error(
-            photos.error ||
-            'Failed to load photos'
-          );
-
-        }
-
-        photoCount.textContent =
-          photos.length;
-
-        gallery.innerHTML = '';
-
-        if (!photos.length) {
-
-          gallery.innerHTML =
-            '<div class="empty">No photos uploaded yet.</div>';
-
-          return;
-        }
-
-        photos.forEach(
-          (photo) => {
-
-            const card =
-              document.createElement('article');
-
-            card.className =
-              'photo-card';
-
-            const img =
-              document.createElement('img');
-
-            img.src =
-              photo.url;
-
-            img.alt =
-              photo.title || 'Photo';
-
-            const info =
-              document.createElement('div');
-
-            info.className =
-              'photo-info';
-
-            const title =
-              document.createElement('div');
-
-            title.className =
-              'photo-title';
-
-            title.textContent =
-              photo.title || 'Untitled';
-
-            const date =
-              document.createElement('div');
-
-            date.className =
-              'photo-date';
-
-            date.textContent =
-              formatDate(photo.uploadedAt);
-
-            const button =
-              document.createElement('button');
-
-            button.className =
-              'delete-btn';
-
-            button.textContent =
-              'Delete Photo';
-
-            button.addEventListener(
-              'click',
-              () => deletePhoto(photo.id)
-            );
-
-            info.appendChild(title);
-            info.appendChild(date);
-            info.appendChild(button);
-
-            card.appendChild(img);
-            card.appendChild(info);
-
-            gallery.appendChild(card);
-
-          }
-        );
-
-      } catch (error) {
-
-        gallery.innerHTML =
-          '<div class="empty">' +
-          'Failed to load photos' +
-          '</div>';
-
-      }
-
-    }
+    await loadProducts();
 
 
-    /* =========================
-       DELETE
-    ========================= */
+  } catch (err) {
 
-    async function deletePhoto(id) {
+    alert(
+      err.message
+    );
 
-      const confirmed =
-        confirm(
-          'Are you sure you want to delete this photo?'
-        );
+  }
 
-      if (!confirmed) {
+}
+
+
+/* ESCAPE HTML */
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* ESCAPE JAVASCRIPT */
+
+function escapeJs(value) {
+
+  return String(value ?? "")
+    .replace(
+      /\\/g,
+      "\\\\"
+    )
+    .replace(
+      /'/g,
+      "\\'"
+    );
+
+}
+
+
+/* IMAGE PREVIEW */
+
+document
+  .getElementById("imageFile")
+  .addEventListener(
+    "change",
+    event => {
+
+      const file =
+        event.target.files[0];
+
+
+      if (!file) {
+
         return;
+
       }
 
-      try {
 
-        const response =
-          await fetch(
-            '/api/admin/photos/' + id,
-            {
-              method: 'DELETE'
-            }
-          );
-
-        const data =
-          await response.json();
-
-        if (response.status === 401) {
-
-          showLogin();
-
-          return;
-        }
-
-        if (!response.ok) {
-
-          throw new Error(
-            data.error || 'Delete failed'
-          );
-
-        }
-
-        await loadPhotos();
-
-      } catch (error) {
-
-        alert(
-          error.message
+      const url =
+        URL.createObjectURL(
+          file
         );
 
-      }
+
+      document
+        .getElementById(
+          "previewImg"
+        )
+        .src = url;
+
+
+      document
+        .getElementById(
+          "imagePreview"
+        )
+        .style.display =
+          "block";
 
     }
+  );
 
 
-    /* =========================
-       LOGOUT
-    ========================= */
+/* START */
 
-    async function logout() {
+checkLogin();
 
-      try {
-
-        await fetch(
-          '/api/admin/logout',
-          {
-            method: 'POST'
-          }
-        );
-
-      } finally {
-
-        showLogin();
-
-        loginForm.reset();
-
-        loginMessage.textContent = '';
-
-      }
-
-    }
-
-
-    /* =========================
-       DATE
-    ========================= */
-
-    function formatDate(date) {
-
-      if (!date) {
-        return '';
-      }
-
-      try {
-
-        return new Date(date)
-          .toLocaleString();
-
-      } catch {
-
-        return '';
-
-      }
-
-    }
-
-
-    /* =========================
-       START
-    ========================= */
-
-    checkSession();
-
-  </script>
+</script>
 
 </body>
 </html>

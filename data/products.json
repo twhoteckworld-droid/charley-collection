@@ -1,0 +1,53 @@
+[
+  {
+    "id": "1791118692568",
+    "name": "Shirt",
+    "category": "Men",
+    "price": 500,
+    "description": "Shbsbs",
+    "image": "/uploads/1791118692466-eu86t1rj.jpg",
+    "active": true,
+    "createdAt": "2026-10-04T12:58:12.569Z",
+    "updatedAt": "2026-10-04T13:12:38.862Z",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  {
+    "id": "1791116621212",
+    "name": "Ddd",
+    "category": "Men",
+    "price": 5444,
+    "description": "Bzsb",
+    "image": "/uploads/1791116621153-miug6czy.jpg",
+    "active": true,
+    "createdAt": "2026-10-04T12:23:41.213Z",
+    "updatedAt": "2026-10-04T12:44:40.673Z",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  {
+    "id": "1791112255979",
+    "name": "Hehe",
+    "category": "Women",
+    "price": 949,
+    "description": "Hwhwb",
+    "image": "/uploads/1791116602144-qe3zgxa7.jpg",
+    "active": true,
+    "createdAt": "2026-10-04T11:10:55.980Z",
+    "updatedAt": "2026-10-04T12:23:22.191Z",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  }
+]

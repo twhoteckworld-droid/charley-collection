@@ -1,16 +1,30 @@
 node_modules/
 .env
+.env.*
+!.env.example
+
 uploads/
 cookies.txt
+test-cookies.txt
 *.log
 
-
-nmskwtio_19aug19.sql
+# Old database/test files
+*.sql
 db-test.js
-index.js
+
+# Backup files — keep locally, don't upload to GitHub
+**/*-before-*
+**/*-backup*
+**/*.backup
+server-before-*
+index-client2-backup.html
+
+# Old standalone backup files
 server-backup.js
 server.before-auth.js
 index-backup.html
 
-*.backup
-index.html
+# Old unused root files
+/index.html
+/index.js
+/public/index-FINAL-WORKING-*.html

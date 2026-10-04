@@ -390,6 +390,244 @@ app.delete(
   }
 );
 
+
+/* =========================
+   ECOMMERCE PRODUCTS
+========================= */
+
+const productsFile = path.join(dataDir, 'products.json');
+const categoriesFile = path.join(dataDir, 'categories.json');
+
+if (!fs.existsSync(productsFile)) {
+  fs.writeFileSync(productsFile, '[]');
+}
+
+if (!fs.existsSync(categoriesFile)) {
+  fs.writeFileSync(categoriesFile, '[]');
+}
+
+function readProducts() {
+  return JSON.parse(
+    fs.readFileSync(productsFile, 'utf8')
+  );
+}
+
+function writeProducts(products) {
+  fs.writeFileSync(
+    productsFile,
+    JSON.stringify(products, null, 2)
+  );
+}
+
+function readCategories() {
+  return JSON.parse(
+    fs.readFileSync(categoriesFile, 'utf8')
+  );
+}
+
+/* PUBLIC: GET PRODUCTS */
+
+app.get('/api/products', (req, res) => {
+  try {
+    const products = readProducts();
+
+    res.json(products.filter(product => product.active !== false));
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: 'Failed to load products'
+    });
+  }
+});
+
+/* PUBLIC: GET CATEGORIES */
+
+app.get('/api/categories', (req, res) => {
+  try {
+    res.json(readCategories());
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: 'Failed to load categories'
+    });
+  }
+});
+
+/* ADMIN: GET ALL PRODUCTS */
+
+app.get('/api/admin/products', requireAdmin, (req, res) => {
+  try {
+    res.json(readProducts());
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: 'Failed to load products'
+    });
+  }
+});
+
+/* ADMIN: ADD PRODUCT */
+
+app.post('/api/admin/products', requireAdmin, (req, res) => {
+  try {
+    const {
+      name,
+      category,
+      price,
+      description,
+      image,
+      active
+    } = req.body;
+
+    if (!name || !String(name).trim()) {
+      return res.status(400).json({
+        error: 'Product name is required'
+      });
+    }
+
+    const products = readProducts();
+
+    const product = {
+      id: Date.now().toString(),
+      name: String(name).trim(),
+      category: String(category || 'Other').trim(),
+      price: price === '' || price == null
+        ? null
+        : Number(price),
+      description: String(description || '').trim(),
+      image: String(image || '').trim(),
+      active: active !== false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+
+    products.unshift(product);
+    writeProducts(products);
+
+    res.json({
+      success: true,
+      product
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: 'Failed to create product'
+    });
+  }
+});
+
+/* ADMIN: UPDATE PRODUCT */
+
+app.put('/api/admin/products/:id', requireAdmin, (req, res) => {
+  try {
+    const products = readProducts();
+
+    const index = products.findIndex(
+      product => String(product.id) === String(req.params.id)
+    );
+
+    if (index === -1) {
+      return res.status(404).json({
+        error: 'Product not found'
+      });
+    }
+
+    const old = products[index];
+
+    const updated = {
+      ...old,
+      name: req.body.name !== undefined
+        ? String(req.body.name).trim()
+        : old.name,
+
+      category: req.body.category !== undefined
+        ? String(req.body.category).trim()
+        : old.category,
+
+      price:
+        req.body.price === '' || req.body.price == null
+          ? null
+          : req.body.price !== undefined
+            ? Number(req.body.price)
+            : old.price,
+
+      description: req.body.description !== undefined
+        ? String(req.body.description).trim()
+        : old.description,
+
+      image: req.body.image !== undefined
+        ? String(req.body.image).trim()
+        : old.image,
+
+      active: req.body.active !== undefined
+        ? Boolean(req.body.active)
+        : old.active,
+
+      updatedAt: new Date().toISOString()
+    };
+
+    products[index] = updated;
+
+    writeProducts(products);
+
+    res.json({
+      success: true,
+      product: updated
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: 'Failed to update product'
+    });
+  }
+});
+
+/* ADMIN: DELETE PRODUCT */
+
+app.delete('/api/admin/products/:id', requireAdmin, (req, res) => {
+  try {
+    let products = readProducts();
+
+    const exists = products.some(
+      product => String(product.id) === String(req.params.id)
+    );
+
+    if (!exists) {
+      return res.status(404).json({
+        error: 'Product not found'
+      });
+    }
+
+    products = products.filter(
+      product => String(product.id) !== String(req.params.id)
+    );
+
+    writeProducts(products);
+
+    res.json({
+      success: true,
+      message: 'Product deleted'
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: 'Failed to delete product'
+    });
+  }
+});
+
 /* =========================
    HEALTH CHECK
 ========================= */
@@ -410,3 +648,37 @@ app.listen(PORT, '0.0.0.0', () => {
     `Hariom Photography running on port ${PORT}`
   );
 });
+
+/* ADMIN: PRODUCT IMAGE UPLOAD */
+
+app.post(
+  '/api/admin/products/upload-image',
+  requireAdmin,
+  upload.single('image'),
+  (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({
+          success: false,
+          error: 'No image file received'
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        url: '/uploads/' + req.file.filename,
+        filename: req.file.filename,
+        originalName: req.file.originalname
+      });
+
+    } catch (error) {
+      console.error('PRODUCT IMAGE UPLOAD ERROR:', error);
+
+      res.status(500).json({
+        success: false,
+        error: 'Image upload failed'
+      });
+    }
+  }
+);
+
